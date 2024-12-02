@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<!-- ROS LAUNCHER FOR DETECT_ARUCO_NODE -->
+<launch>
+  <!-- Namespaces -->
+  <arg name="ns"          default="" />
+
+  <!-- Markers Settings -->
+  <arg name="aruco_marker_length" default="0.176" />
+  <!-- <arg name="aruco_marker_dictionary" default="DICT_6X6_250" /> -->
+
+  <!-- Names of the topics to subscribe to -->
+  <arg name="camera_info_topic"         default="$(arg ns)/camera/rgb/camera_info" />
+  <arg name="image_topic"               default="$(arg ns)/camera/rgb/image_raw" />
+
+  <!-- Names of the TF frames used-->
+  <arg name="camera_optical_frame"      default="$(arg ns)/camera_rgb_optical_frame" />
+  <arg name="detected_markers_frame"    default="$(arg ns)/marker_frame_" />
+
+  <!-- Nodes to run -->
+  <!-- Detect Aruco Markers Node-->
+  <node pkg="detect_aruco_markers" type="detect_aruco_markers_node" name="detect_aruco_markers" output="screen" launch-prefix="gdb --ex=run --args">
+    <param name="camera_info_topic_name" type="string" value="$(arg camera_info_topic)" />
+
+    <param name="image_topic_name" type="string" value="$(arg image_topic)" />
+    <param name="camera_optical_frame" type="string" value="$(arg camera_optical_frame)" />
+    <param name="detected_markers_frame" type="string" value="$(arg detected_markers_frame)" />
+
+    <param name="aruco_marker_length" type="double" value="$(arg aruco_marker_length)" />
+  </node>
+
+</launch>
