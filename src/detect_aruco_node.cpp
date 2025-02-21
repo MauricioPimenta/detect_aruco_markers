@@ -39,6 +39,7 @@ class CameraInfoListener
 			std::string camera_info_topic_name;
 			ros::NodeHandle nh_private("~");
 			nh_private.param<std::string>("camera_info_topic", camera_info_topic_name, "/camera/rgb/camera_info");
+			
 
 			this->camera_info_sub_ = this->node_handle_.subscribe(camera_info_topic_name, 1, &CameraInfoListener::cameraInfoCb, this);
 		}
